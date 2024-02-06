@@ -38,3 +38,7 @@
 06/02/2024 - 19:13: Email excedeu o limite de 50 caracteres
 06/02/2024 - 19:13: Nome do cliente excedeu o limete de 70 caracteres
 06/02/2024 - 19:13: O nome do cliente é obrigatorio
+06/02/2024 - 19:25: O nome do cliente é obrigatorio
+06/02/2024 - 19:25: Nome do cliente excedeu o limete de 70 caracteres
+06/02/2024 - 19:26: Descrição excedeu o limete de 20 caracteres
+06/02/2024 - 19:26: A descrição é obrigatoria
