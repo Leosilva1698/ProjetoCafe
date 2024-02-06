@@ -3,6 +3,7 @@ using Azure.Messaging;
 using Microsoft.AspNetCore.Http.HttpResults;
 using Microsoft.EntityFrameworkCore;
 using ProjetoCafe.DTOS;
+using ProjetoCafe.Exceptions;
 
 namespace ProjetoCafe.Models
 
@@ -18,9 +19,9 @@ namespace ProjetoCafe.Models
             } 
             set 
             {
-                if (string.IsNullOrEmpty(value) || value.Length > 70)
+                if (string.IsNullOrEmpty(value) || value.Length > 70 || value.Trim() == "")
                 {
-                    throw new DbUpdateException("Erro no nome");
+                    throw new CafeException("Erro no nome");
                 }
                 this._nome = value;
             } 
