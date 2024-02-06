@@ -12,7 +12,7 @@ namespace ProjetoCafe.Controllers
         private readonly CafeDBContext _context;
 
         public NotaFiscalController()
-        {   
+        {
             _context = new CafeDBContext();
         }
 
@@ -39,7 +39,7 @@ namespace ProjetoCafe.Controllers
         {
             var notasFiscais = _context.NotaFiscal.ToList();
             List<NotaFiscalDTO> listNotasFiscais = new List<NotaFiscalDTO>();
-            
+
             foreach (var nf in notasFiscais)
             {
                 listNotasFiscais.Add(new NotaFiscalDTO(nf));
@@ -53,10 +53,10 @@ namespace ProjetoCafe.Controllers
         {
             var notasFiscais = _context.NotaFiscal
                 .FirstOrDefault(nf => nf.NotaFiscalID == id);
-            
+
             if (notasFiscais == null)
                 return NotFound();
-                
+
             return Ok(new NotaFiscalDTO(notasFiscais));
         }
 
@@ -73,35 +73,36 @@ namespace ProjetoCafe.Controllers
 
             var pedidoValores = _context.Pedido
                 .Where(p => p.ComandaID == novaNotaFiscal.ComandaID)
-                .Select(p => p.ValorTotal)    
+                .Select(p => p.ValorTotal)
                 .ToList();
 
             foreach (var valor in pedidoValores)
             {
                 notaFiscal.ValorTotal += valor;
             }
-
+            DateTime dataAtual = DateTime.Now;
             var cupom = _context.CupomCliente
                 .OrderBy(c => c.NotaFiscalID)
-                .FirstOrDefault (
+                .FirstOrDefault(
                     c => c.ClienteID == novaNotaFiscal.ClienteID &&
                     c.Valor == novaNotaFiscal.Desconto &&
-                    c.Valido == true
+                    c.Valido == true &&
+                    c.DataValidade < dataAtual
                 );
 
             if (cupom == null)
             {
                 notaFiscal.Desconto = 0;
-            } 
+            }
             else
             {
                 cupom.Valido = false;
                 _context.Entry(cupom).CurrentValues.SetValues(cupom);
             }
 
-            notaFiscal.ValorFinal = notaFiscal.TaxaServico == true 
-                ?   notaFiscal.ValorTotal * 1.1 - notaFiscal.Desconto
-                :   notaFiscal.ValorTotal - notaFiscal.Desconto;
+            notaFiscal.ValorFinal = notaFiscal.TaxaServico == true
+                ? notaFiscal.ValorTotal * 1.1 - notaFiscal.Desconto
+                : notaFiscal.ValorTotal - notaFiscal.Desconto;
 
             comanda.EstaAberta = false;
             _context.Entry(comanda).CurrentValues.SetValues(comanda);
@@ -130,6 +131,6 @@ namespace ProjetoCafe.Controllers
             _context.NotaFiscal.Remove(notaFiscal);
             _context.SaveChanges();
             return Ok();
-        } 
+        }
     }
 }

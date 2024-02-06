@@ -78,22 +78,31 @@ namespace ProjetoCafe.Controllers
         {
             try
             {
-                var cliente = _context.CupomCliente
-                .Include(c => c.Cliente)
+                var cliente = _context.Cliente
                 .FirstOrDefault(c => c.ClienteID == id);
 
                 if (cliente == null)
-                    return NotFound("Cliente não possui cupons validos");
+                    return NotFound("Cliente não encontrado");
 
                 var cupons = _context.CupomCliente
                     .Include(c => c.Cliente)
                     .Where(c => c.ClienteID == id && c.Valido == true)
-                    .Select(c => new { c.Valor, c.NotaFiscalID })
                     .ToList();
+                DateTime dataAtual = DateTime.Now;
 
+                foreach (var cupom in cupons)
+                {
+                    if (cupom.DataValidade < dataAtual)
+                    {
+                        cupom.Valido = false;
+                        _context.Entry(cupom).CurrentValues.SetValues(cupom);
+                        cupons.Remove(cupom);
+                    }
+                }
+                _context.SaveChanges();
                 return Ok(new
                 {
-                    Cliente = cliente.Cliente!.Nome,
+                    Cliente = cliente.Nome,
                     Cupons = cupons
                 });
             }
