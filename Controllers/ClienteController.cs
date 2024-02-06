@@ -4,6 +4,7 @@ using Microsoft.EntityFrameworkCore.Query.SqlExpressions;
 using ProjetoCafe.Data;
 using ProjetoCafe.DTOS;
 using ProjetoCafe.Models;
+using ProjetoCafe.Exceptions;
 
 namespace ProjetoCafe.Controllers
 {
@@ -14,99 +15,201 @@ namespace ProjetoCafe.Controllers
         private readonly CafeDBContext _context;
 
         public ClienteController()
-        {   
+        {
             _context = new CafeDBContext();
         }
 
         [HttpGet]
         public IActionResult Get()
         {
-            var clientes = _context.Cliente.ToList();
-            List<ClienteDTO> listClientes = new List<ClienteDTO>();
-
-            foreach (var c in clientes)
+            try
             {
-                listClientes.Add(new ClienteDTO(c));
+                var clientes = _context.Cliente.ToList();
+                List<ClienteDTO> listClientes = new List<ClienteDTO>();
+
+                foreach (var c in clientes)
+                {
+                    listClientes.Add(new ClienteDTO(c));
+                }
+
+                return Ok(listClientes);
+            }
+            catch (InvalidOperationException e)
+            {
+                _ = new CafeException(e.Message);
+                return BadRequest("Erro ao se comunicar com o Banco de Dados");
+            }
+            catch (Exception e)
+            {
+                _ = new CafeException(e.Message);
+                return BadRequest("Sistema fora do Ar!");
             }
 
-            return Ok(listClientes);
         }
 
         [HttpGet("{id}")]
         public IActionResult GetById(int id)
         {
-            var cliente = _context.Cliente
-                .FirstOrDefault(c => c.ClienteID == id);
+            try
+            {
+                var cliente = _context.Cliente
+                    .FirstOrDefault(c => c.ClienteID == id);
 
-            if (cliente == null)
-                return NotFound();
-        
-            return Ok(new ClienteDTO(cliente));
+                if (cliente == null)
+                    return NotFound("Cliente não encontrado");
+
+                return Ok(new ClienteDTO(cliente));
+            }
+            catch (InvalidOperationException e)
+            {
+                _ = new CafeException(e.Message);
+                return BadRequest("Erro ao se comunicar com o Banco de Dados");
+            }
+            catch (Exception e)
+            {
+                _ = new CafeException(e.Message);
+                return BadRequest("Sistema fora do Ar!");
+            }
+
         }
 
         [HttpGet("VerCupons/{id}")]
         public IActionResult visualizarCupom(int id)
         {
-            var cliente = _context.CupomCliente
+            try
+            {
+                var cliente = _context.CupomCliente
                 .Include(c => c.Cliente)
                 .FirstOrDefault(c => c.ClienteID == id);
 
-            if (cliente == null)
-                return NotFound();
+                if (cliente == null)
+                    return NotFound("Cliente não possui cupons validos");
 
-            var cupons = _context.CupomCliente
-                .Include(c => c.Cliente)
-                .Where(c => c.ClienteID == id && c.Valido == true)
-                .Select(c => new { c.Valor, c.NotaFiscalID })
-                .ToList();
+                var cupons = _context.CupomCliente
+                    .Include(c => c.Cliente)
+                    .Where(c => c.ClienteID == id && c.Valido == true)
+                    .Select(c => new { c.Valor, c.NotaFiscalID })
+                    .ToList();
 
-            return Ok(new {
-                Cliente = cliente.Cliente!.Nome,
-                Cupons = cupons
-            });
+                return Ok(new
+                {
+                    Cliente = cliente.Cliente!.Nome,
+                    Cupons = cupons
+                });
+            }
+            catch (InvalidOperationException e)
+            {
+                _ = new CafeException(e.Message);
+                return BadRequest("Erro ao se comunicar com o Banco de Dados");
+            }
+            catch (Exception e)
+            {
+                _ = new CafeException(e.Message);
+                return BadRequest("Sistema fora do Ar!");
+            }
+
+
         }
 
         [HttpPost]
         public IActionResult Post([FromBody] ClienteDTO novoCliente)
         {
-            ClienteModel cliente = new ClienteModel(novoCliente);
-            _context.Cliente.Add(cliente);
-            _context.SaveChanges();
-            
-            novoCliente.setClienteId(cliente.ClienteID);
-            return Ok(novoCliente);
+            try
+            {
+                ClienteModel cliente = new ClienteModel(novoCliente);
+                _context.Cliente.Add(cliente);
+                _context.SaveChanges();
+
+                novoCliente.setClienteId(cliente.ClienteID);
+                return Ok(novoCliente);
+            }
+            catch (InvalidOperationException e)
+            {
+                _ = new CafeException(e.Message);
+                return BadRequest("Erro ao se comunicar com o Banco de Dados");
+            }
+            catch (FormatException e)
+            {
+                _ = new CafeException(e.Message);
+                return BadRequest("Formato inválido");
+            }
+            catch (CafeException e)
+            {
+                return BadRequest(e.avisoErro);
+            }
+            catch (Exception e)
+            {
+                _ = new CafeException(e.Message);
+                return BadRequest("Sistema fora do Ar!");
+            }
+
         }
 
         [HttpPut("{id}")]
         public IActionResult Put(int id, [FromBody] ClienteDTO edicoes)
         {
-            var cliente = _context.Cliente
-                .FirstOrDefault(c => c.ClienteID == id);
+            try
+            {
+                var cliente = _context.Cliente
+                    .FirstOrDefault(c => c.ClienteID == id);
 
-            if (cliente == null)
-                return NotFound();
-            
-            cliente = edicoes.editCliente(cliente);
+                if (cliente == null)
+                    return NotFound("Cliente não encontrado");
 
-            _context.Entry(cliente).CurrentValues.SetValues(cliente);
-            _context.SaveChanges();
-            return Ok(edicoes);
+                cliente = edicoes.editCliente(cliente);
+
+                _context.Entry(cliente).CurrentValues.SetValues(cliente);
+                _context.SaveChanges();
+                return Ok(edicoes);
+            }
+            catch (InvalidOperationException e)
+            {
+                _ = new CafeException(e.Message);
+                return BadRequest("Erro ao se comunicar com o Banco de Dados");
+            }
+            catch (FormatException e)
+            {
+                _ = new CafeException(e.Message);
+                return BadRequest("Formato inválido");
+            }
+            catch (CafeException e)
+            {
+                return BadRequest(e.avisoErro);
+            }
+            catch (Exception e)
+            {
+                _ = new CafeException(e.Message);
+                return BadRequest("Sistema fora do Ar!");
+            }
         }
 
         [HttpDelete("{id}")]
         public IActionResult Delete(int id)
         {
-            var cliente = _context.Cliente
-                .FirstOrDefault(c => c.ClienteID == id);
-            
-            if (cliente == null)
+            try
             {
-                return NotFound();
-            }
+                var cliente = _context.Cliente
+                    .FirstOrDefault(c => c.ClienteID == id);
 
-            _context.Cliente.Remove(cliente);
-            _context.SaveChanges();
-            return Ok();
+                if (cliente == null)
+                {
+                    return NotFound("Cliente não encontrado");
+                }
+
+                _context.Cliente.Remove(cliente);
+                _context.SaveChanges();
+                return Ok($"Cliente {cliente.Nome} excluido");
+            }
+            catch (InvalidOperationException e)
+            {
+                _ = new CafeException(e.Message);
+                return BadRequest("Erro ao se comunicar com o Banco de Dados");
+            }
+            catch (Exception e)
+            {
+                _ = new CafeException(e.Message);
+                return BadRequest("Sistema fora do Ar!");
+            }
         }
     }
 }

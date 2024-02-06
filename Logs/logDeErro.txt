@@ -32,3 +32,9 @@
 06/02/2024 - 17:47: Valor inválido!
 06/02/2024 - 17:47: Nome é obrigatorio!
 06/02/2024 - 17:47: Valor inválido!
+06/02/2024 - 19:12: O nome do cliente é obrigatorio
+06/02/2024 - 19:12: Telefone invalido. Ex:(41999999999)
+06/02/2024 - 19:12: O CPF é obrigatorio
+06/02/2024 - 19:13: Email excedeu o limite de 50 caracteres
+06/02/2024 - 19:13: Nome do cliente excedeu o limete de 70 caracteres
+06/02/2024 - 19:13: O nome do cliente é obrigatorio
