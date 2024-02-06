@@ -28,7 +28,7 @@ namespace ProjetoCafe.Models
         public string? Telefone { get; set; }
         public string? Email { get; set; }
         public string? CPF { get; set; }
-
+        
         public ClienteModel() { }
 
         public ClienteModel(ClienteDTO cliente)

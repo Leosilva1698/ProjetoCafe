@@ -31,14 +31,14 @@ namespace ProjetoCafe.Mappings
                     ComandaID = 1,
                     NumeroComanda = 1,
                     Mesa = null,
-                    EstaAberta = false
+                    EstaAberta = true
                 },
                 new ComandaModel
                 {
                     ComandaID = 2,
                     NumeroComanda = 2,
                     Mesa = 1,
-                    EstaAberta = true
+                    EstaAberta = false
                 }
             );
         }

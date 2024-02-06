@@ -10,7 +10,7 @@ namespace ProjetoCafe.DTOS
         public bool TaxaServico { get; set; }
         public double Desconto { get; set; }
         public double? ValorFinal { get; private set; }
-        public int? ClienteID { get; set; }
+        public int ClienteID { get; set; }
         public int ComandaID  { get; set; }
         public int FormaPagamentoID { get; set; }
 

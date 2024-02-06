@@ -52,6 +52,11 @@ namespace ProjetoCafe.Controllers
         [HttpPost]
         public IActionResult Post([FromBody] PedidoDTO novoPedido)
         {
+            var comanda = _context.Comanda.FirstOrDefault(c => c.ComandaID == novoPedido.ComandaID);
+
+            if (comanda == null || comanda.EstaAberta == false)
+                return BadRequest("Comanda não foi criada ou ja esta fechada!");
+
             PedidoModel pedido = new PedidoModel(novoPedido);
             _context.Pedido.Add(pedido);
             _context.SaveChanges();

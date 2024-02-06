@@ -137,3 +137,4 @@ C:\Users\Dimitri\Desktop\ProjetoCafe\obj\Debug\net8.0\refint\ProjetoCafe.dll
 C:\Users\Dimitri\Desktop\ProjetoCafe\obj\Debug\net8.0\ProjetoCafe.pdb
 C:\Users\Dimitri\Desktop\ProjetoCafe\obj\Debug\net8.0\ProjetoCafe.genruntimeconfig.cache
 C:\Users\Dimitri\Desktop\ProjetoCafe\obj\Debug\net8.0\ref\ProjetoCafe.dll
+C:\Users\Dimitri\Desktop\ProjetoCafe\obj\Debug\net8.0\ProjetoCafe.sourcelink.json

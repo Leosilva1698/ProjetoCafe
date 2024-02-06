@@ -16,6 +16,24 @@ namespace ProjetoCafe.Controllers
             _context = new CafeDBContext();
         }
 
+        void GerarCashBack(int ClienteId, int NotaFiscalId)
+        {
+            var notaFiscal = _context.NotaFiscal.FirstOrDefault(nf => nf.NotaFiscalID == NotaFiscalId);
+            var cliente = _context.Cliente.FirstOrDefault(c => c.ClienteID == ClienteId);
+
+            // if (cliente == null)
+            // {
+            //     // throw new cafeExp
+            // }
+
+            DateTime dataHora = DateTime.Now;
+
+            CupomClienteModel novoCupom = new CupomClienteModel(ClienteId, NotaFiscalId, dataHora, dataHora.AddDays(14), notaFiscal!.ValorTotal * .1, true);
+
+            _context.CupomCliente.Add(novoCupom);
+            _context.SaveChanges();
+        }
+
         [HttpGet]
         public IActionResult Get()
         {
@@ -84,37 +102,22 @@ namespace ProjetoCafe.Controllers
             notaFiscal.ValorFinal = notaFiscal.TaxaServico == true 
                 ?   notaFiscal.ValorTotal * 1.1 - notaFiscal.Desconto
                 :   notaFiscal.ValorTotal - notaFiscal.Desconto;
-            
+
             comanda.EstaAberta = false;
             _context.Entry(comanda).CurrentValues.SetValues(comanda);
             _context.NotaFiscal.Add(notaFiscal);
             _context.SaveChanges();
 
+            if (notaFiscal.ValorTotal > 50 && novaNotaFiscal.ClienteID != 0)
+            {
+                GerarCashBack(novaNotaFiscal.ClienteID, notaFiscal.NotaFiscalID);
+            }
+
             novaNotaFiscal.setNotaFiscalValues(notaFiscal);
             return Ok(novaNotaFiscal);
         }
 
-        [HttpPost("GerarCupom")]
-        public IActionResult GerarCashBack(int ClienteId, int NotaFiscalId)
-        {
-            var notaFiscal = _context.NotaFiscal.FirstOrDefault(nf => nf.NotaFiscalID == NotaFiscalId);
-            var cliente = _context.Cliente.FirstOrDefault(c => c.ClienteID == ClienteId);
 
-            if (notaFiscal == null || cliente == null)
-                return NotFound();
-
-            if (notaFiscal.ValorTotal <= 50)
-                return BadRequest("Valor nao suficiente");
-
-            DateTime dataHora = DateTime.Now;
-
-            CupomClienteModel novoCupom = new CupomClienteModel(ClienteId, NotaFiscalId, dataHora, dataHora.AddDays(14), notaFiscal!.ValorTotal * .1, true);
-
-            _context.CupomCliente.Add(novoCupom);
-            _context.SaveChanges();
-            return Ok(new CupomClienteDTO(novoCupom));
-        }
-    
         [HttpDelete("{id}")]
         public IActionResult Delete(int id)
         {
