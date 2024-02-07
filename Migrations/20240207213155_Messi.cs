@@ -295,7 +295,7 @@ namespace ProjetoCafe.Migrations
             migrationBuilder.InsertData(
                 table: "tb_notas_fiscais",
                 columns: new[] { "NotaFiscalID", "ComandaID", "DataHoraCriacao", "Desconto", "FormaPagamentoID", "TaxaServico", "ValorFinal", "ValorTotal" },
-                values: new object[] { 1, 2, new DateTime(2024, 2, 6, 23, 44, 47, 34, DateTimeKind.Local).AddTicks(2554), 0m, 2, false, 14.8m, 14.8m });
+                values: new object[] { 1, 2, new DateTime(2024, 2, 7, 18, 31, 54, 815, DateTimeKind.Local).AddTicks(2170), 0m, 2, false, 14.8m, 14.8m });
 
             migrationBuilder.InsertData(
                 table: "tb_pedidos",

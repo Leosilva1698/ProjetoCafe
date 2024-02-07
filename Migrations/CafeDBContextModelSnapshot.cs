@@ -328,7 +328,7 @@ namespace ProjetoCafe.Migrations
                         {
                             NotaFiscalID = 1,
                             ComandaID = 2,
-                            DataHoraCriacao = new DateTime(2024, 2, 6, 23, 44, 47, 34, DateTimeKind.Local).AddTicks(2554),
+                            DataHoraCriacao = new DateTime(2024, 2, 7, 18, 31, 54, 815, DateTimeKind.Local).AddTicks(2170),
                             Desconto = 0m,
                             FormaPagamentoID = 2,
                             TaxaServico = false,

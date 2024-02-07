@@ -117,7 +117,7 @@ namespace ProjetoCafe.Controllers
                         c => c.ClienteID == novaNotaFiscal.ClienteID &&
                         c.Valor == novaNotaFiscal.Desconto &&
                         c.Valido == true &&
-                        c.DataValidade < dataAtual
+                        c.DataValidade > dataAtual
                     );
 
                 if (cupom == null)
