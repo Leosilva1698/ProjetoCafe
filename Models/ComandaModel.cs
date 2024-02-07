@@ -8,7 +8,6 @@ namespace ProjetoCafe.Models
     {
         private int _numeroComanda;
         public int ComandaID { get; set; }
-
         public int? Mesa { get; set; }
         public bool EstaAberta { get; set; }
         public int NumeroComanda
@@ -27,7 +26,6 @@ namespace ProjetoCafe.Models
                 this._numeroComanda = value;
             }
         }
-
 
         public ComandaModel() { }
 
