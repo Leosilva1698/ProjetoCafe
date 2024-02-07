@@ -8393,19 +8393,19 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\Dimitri\\.nuget\\packages\\": {}
+    "C:\\Users\\leosi\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\Dimitri\\Desktop\\ProjetoCafeCopy\\ProjetoCafe\\ProjetoCafe.csproj",
+      "projectUniqueName": "C:\\Users\\leosi\\OneDrive\\Área de Trabalho\\Curso de Desenvolvimento de Aplicalções VOLVO-PUC\\Projeto\\ProjetoFinalFinal\\ProjetoCafe\\ProjetoCafe.csproj",
       "projectName": "ProjetoCafe",
-      "projectPath": "C:\\Users\\Dimitri\\Desktop\\ProjetoCafeCopy\\ProjetoCafe\\ProjetoCafe.csproj",
-      "packagesPath": "C:\\Users\\Dimitri\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\Dimitri\\Desktop\\ProjetoCafeCopy\\ProjetoCafe\\obj\\",
+      "projectPath": "C:\\Users\\leosi\\OneDrive\\Área de Trabalho\\Curso de Desenvolvimento de Aplicalções VOLVO-PUC\\Projeto\\ProjetoFinalFinal\\ProjetoCafe\\ProjetoCafe.csproj",
+      "packagesPath": "C:\\Users\\leosi\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\leosi\\OneDrive\\Área de Trabalho\\Curso de Desenvolvimento de Aplicalções VOLVO-PUC\\Projeto\\ProjetoFinalFinal\\ProjetoCafe\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
-        "C:\\Users\\Dimitri\\AppData\\Roaming\\NuGet\\NuGet.Config"
+        "C:\\Users\\leosi\\AppData\\Roaming\\NuGet\\NuGet.Config"
       ],
       "originalTargetFrameworks": [
         "net8.0"

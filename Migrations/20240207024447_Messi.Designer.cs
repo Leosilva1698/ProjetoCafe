@@ -12,7 +12,7 @@ using ProjetoCafe.Data;
 namespace ProjetoCafe.Migrations
 {
     [DbContext(typeof(CafeDBContext))]
-    [Migration("20240206195825_Messi")]
+    [Migration("20240207024447_Messi")]
     partial class Messi
     {
         /// <inheritdoc />
@@ -331,7 +331,7 @@ namespace ProjetoCafe.Migrations
                         {
                             NotaFiscalID = 1,
                             ComandaID = 2,
-                            DataHoraCriacao = new DateTime(2024, 2, 6, 16, 58, 24, 535, DateTimeKind.Local).AddTicks(4796),
+                            DataHoraCriacao = new DateTime(2024, 2, 6, 23, 44, 47, 34, DateTimeKind.Local).AddTicks(2554),
                             Desconto = 0m,
                             FormaPagamentoID = 2,
                             TaxaServico = false,

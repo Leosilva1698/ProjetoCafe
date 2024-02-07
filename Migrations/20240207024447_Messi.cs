@@ -49,9 +49,9 @@ namespace ProjetoCafe.Migrations
                 {
                     ComandaID = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    NumeroComanda = table.Column<int>(type: "int", nullable: false),
                     Mesa = table.Column<int>(type: "int", nullable: true),
-                    EstaAberta = table.Column<bool>(type: "bit", nullable: false)
+                    EstaAberta = table.Column<bool>(type: "bit", nullable: false),
+                    NumeroComanda = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -295,7 +295,7 @@ namespace ProjetoCafe.Migrations
             migrationBuilder.InsertData(
                 table: "tb_notas_fiscais",
                 columns: new[] { "NotaFiscalID", "ComandaID", "DataHoraCriacao", "Desconto", "FormaPagamentoID", "TaxaServico", "ValorFinal", "ValorTotal" },
-                values: new object[] { 1, 2, new DateTime(2024, 2, 6, 16, 58, 24, 535, DateTimeKind.Local).AddTicks(4796), 0m, 2, false, 14.8m, 14.8m });
+                values: new object[] { 1, 2, new DateTime(2024, 2, 6, 23, 44, 47, 34, DateTimeKind.Local).AddTicks(2554), 0m, 2, false, 14.8m, 14.8m });
 
             migrationBuilder.InsertData(
                 table: "tb_pedidos",
