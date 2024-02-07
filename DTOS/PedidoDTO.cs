@@ -3,7 +3,7 @@ using ProjetoCafe.Models;
 namespace ProjetoCafe.DTOS
 {
     public class PedidoDTO
-    {
+    {   
         public int PedidoID { get; private set; }
         public TimeOnly HoraFeito { get; private set; }
         public double? ValorTotal { get; private set; }

@@ -5,6 +5,7 @@ using ProjetoCafe.Data;
 using ProjetoCafe.DTOS;
 using ProjetoCafe.Models;
 using ProjetoCafe.Exceptions;
+using System.ComponentModel;
 
 namespace ProjetoCafe.Controllers
 {
@@ -89,7 +90,7 @@ namespace ProjetoCafe.Controllers
                     .Where(c => c.ClienteID == id && c.Valido == true)
                     .ToList();
                 DateTime dataAtual = DateTime.Now;
-
+                List<CupomClienteDTO> ListaCupom = new List<CupomClienteDTO>();
                 foreach (var cupom in cupons)
                 {
                     if (cupom.DataValidade < dataAtual)
@@ -98,12 +99,16 @@ namespace ProjetoCafe.Controllers
                         _context.Entry(cupom).CurrentValues.SetValues(cupom);
                         cupons.Remove(cupom);
                     }
+                    else
+                    {
+                        ListaCupom.Add(new CupomClienteDTO(cupom));
+                    }
                 }
                 _context.SaveChanges();
                 return Ok(new
                 {
                     Cliente = cliente.Nome,
-                    Cupons = cupons
+                    Cupons = ListaCupom
                 });
             }
             catch (InvalidOperationException e)
