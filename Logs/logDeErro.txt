@@ -45,3 +45,12 @@
 06/02/2024 - 19:42: O numero da comanda é obrigatorio
 06/02/2024 - 19:48: O numero da comanda é obrigatorio
 06/02/2024 - 19:49: O numero da comanda é obrigatorio
+06/02/2024 - 22:39: Quantidade informada é inválida!
+06/02/2024 - 22:39: Observação do pedido excedeu o limite de 70 caracteres!
+06/02/2024 - 22:39: An error occurred while saving the entity changes. See the inner exception for details.
+06/02/2024 - 22:42: An error occurred while saving the entity changes. See the inner exception for details.
+06/02/2024 - 22:44: An error occurred while saving the entity changes. See the inner exception for details.
+06/02/2024 - 22:51: Quantidade informada é inválida!
+06/02/2024 - 23:08: Quantidade informada é inválida!
+06/02/2024 - 23:09: An error occurred while saving the entity changes. See the inner exception for details.
+06/02/2024 - 23:09: Quantidade informada é inválida!

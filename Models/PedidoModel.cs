@@ -22,6 +22,8 @@ namespace ProjetoCafe.Models
                 {
                     throw new CafeException("Valor do pedido excedeu o limite de valor, crie outro pedido");
                 }
+
+                _ValorTotal = value;
             }
         }
         public int FuncionarioID { get; set; }
