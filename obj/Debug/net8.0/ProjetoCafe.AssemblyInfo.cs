@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("ProjetoCafe")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+322fcd552ba1c3873308abdfd4f419955f151275")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+2604ebfefe5de01fdeea3fa77410bc645f414fea")]
 [assembly: System.Reflection.AssemblyProductAttribute("ProjetoCafe")]
 [assembly: System.Reflection.AssemblyTitleAttribute("ProjetoCafe")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

@@ -18,6 +18,5 @@ namespace ProjetoCafe.Exceptions
             File.AppendAllText(nomeArquivo, logErro, Encoding.Default);
         }
 
-        
     }
 }

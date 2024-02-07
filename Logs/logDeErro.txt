@@ -62,3 +62,6 @@
 06/02/2024 - 23:41: An error occurred while saving the entity changes. See the inner exception for details.
 06/02/2024 - 23:45: Parameter value '121321321321321000,00' is out of range.
 06/02/2024 - 23:50: Desconto excede o valor permitido
+07/02/2024 - 17:49 -  - .ctor: Descrição é obrigatória
+07/02/2024 - 17:51 -  - .ctor: Descrição é obrigatória
+07/02/2024 - 17:52 -  - .cctor: Descrição é obrigatória
